@@ -1,0 +1,170 @@
+body {
+	font-size: 100%;
+	max-height: fit-content;
+	text-align: center;
+	display: grid;
+	margin: 0;
+	grid-template-columns: auto;
+	grid-template-rows: repeat (3, auto);
+
+}
+
+.color1 {
+	height: auto;
+	background-color: #565b60;
+}
+
+.color1,
+.color1 h2,
+#schrijfdag {
+	padding: 20px;
+}
+
+.color2 {
+	height: 33vh;
+	background-color: #676374;
+	padding: 10px 0 40px;
+}
+
+.color3 {
+	height: 33vh;
+	background-color: #717171;
+	padding: 20px;
+}
+
+header,
+h1,
+h2,
+h3,
+main {
+	font-family: "Yanone Kaffeesatz", "Arial Narrow", Sans-Serif;
+	color: #ECCFAE;
+	font-weight: 900;
+	font-style: italic;
+	margin: 0px;
+}
+
+h1 {
+	font-family: 'Press Start 2P';
+	font-size: 50px;
+	line-height: 1.6;
+	color: yellow;
+}
+
+.orange {
+	font-style: bold;
+	font-weight: 900;
+	color: #ECCFAE;
+}
+
+body,
+select {
+	margin: 5px 10px;
+}
+
+select,
+#jaarkiezer {
+	padding: 5px;
+	border: 2px solid grey;
+}
+
+select option {
+	font-weight: bold;
+	padding: 5px;
+}
+
+main {
+	margin-left: 10px;
+}
+
+.container {
+	position: relative;
+	display: inline-block;
+	margin: 10px;
+}
+
+#datumkiezer,
+#maandkiezer,
+main #toondag,
+#dagenverschil,
+input {
+	display: inline;
+}
+
+#schrijfdag,
+#toondag,
+#dagenverschil {
+	color: #ece1d5;
+	font-size: 170%;
+}
+
+input,
+select {
+	font-family: "Yanone Kaffeesatz", "Arial Narrow", Sans-Serif;
+}
+
+input {
+	width: 50px;
+}
+
+img {
+	position: relative;
+	width: 400px;
+	height: 300px;
+}
+
+#playstop {
+	position: absolute;
+	bottom: 45%;
+	right: 50%;
+	width: 30px;
+	height: 30px;
+	z-index: 1;
+}
+
+#specialdates,
+#onthisday {
+	color: #d39d28;
+	font-size: 22px;
+}
+
+#onthisday {
+	margin-top: 10px;
+}
+
+#specialdates a {
+	color: #dfbc70;
+	text-decoration: none;
+	font-style: italic;
+}
+
+.unvisible {
+	visibility: hidden;
+}
+
+h3 {
+	margin-left: 10px;
+}
+
+#onthisday {
+	display: none;
+}
+
+@media (max-width: 400px) {
+	html {
+		font-size: 130%;
+	}
+
+	header,
+	h1,
+	h2,
+	h3,
+	main,
+	#schrijfdag,
+	#toondag,
+	#dagenverschil {
+		font-size: large;
+
+	}
+
+}
