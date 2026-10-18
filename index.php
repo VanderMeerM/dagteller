@@ -12,8 +12,6 @@
  <!-- <script defer src="./assets/JS/ramadan.js"></script> --> 
   <script defer src="./assets/JS/countdown.js"></script>
 
- <!-- <script defer src="./assets/JS/dagteller.js"></script> -->
-
 </head>
 
 <?php 
