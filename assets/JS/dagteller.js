@@ -1,5 +1,5 @@
-const today = new Date().getTime();
-const year = new Date(today).getFullYear();
+//const today = new Date().getTime();
+//const year = new Date(today).getFullYear();
 const month = new Date().getMonth();
 const months = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
 const dagen = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
@@ -8,9 +8,10 @@ const dagenverschil = document.getElementById("dagenverschil");
 
 const datumkiezer = document.getElementById("datumkiezer");
 const maandkiezer = document.getElementById("maandkiezer");
-const jaarkiezer = document.getElementById("jaarkiezer");
+const jaarkiezer = document.getElementById("select_year");
 jaarkiezer.value = new Date().getFullYear();
 
+/*
 const date = [...Array.from(Array(31), (_, i) => i + 1)];
 
 let seldate = document.createElement("select");
@@ -36,10 +37,11 @@ months.map(maand => {
 })
 
 document.getElementById('currentyear').innerHTML = `(${year})?`;
-
+*/
 
 // Deel 1: Aantal dagen vanaf feestdag berekenen  
 
+/* 
 const feestdagen = [
 	{ date: null, disabled: true, text: 'Selecteer feestdag' },
 	{ month: 1, date: 1, text: 'Nieuwjaarsdag' },
@@ -50,7 +52,7 @@ const feestdagen = [
 	{ month: 12, date: 31, text: 'Oudjaar' }
 ]
 
-//Prinsjesdag 
+Prinsjesdag 
 
 let Prinsjesdag;
 const firstSeptember = new Date(year, 8, 1).getTime();
@@ -69,34 +71,12 @@ feestdagen.push({ month: (new Date(Easter).getMonth() + 1), date: new Date(Easte
 feestdagen.push({ month: (new Date(ascensionDay).getMonth() + 1), date: new Date(ascensionDay).getDate(), text: 'Hemelvaart' });
 feestdagen.push({ month: (new Date(penteCost).getMonth() + 1), date: new Date(penteCost).getDate(), text: 'Pinksteren' });
 feestdagen.push({ month: 4, date: 27, text: 'Koningsdag' });
+*/
 
 
-//Ramadan 
-
-function GetRamadanAndSortSelection() {
-	fetch(`https://api.aladhan.com/v1/gToH/${new Date().getDate()}-${new Date().getMonth() + 1}-${new Date().getFullYear()}`)
-		.then((res) => res.json())
-		.then((data) => {
-
-			const IslYear = parseInt(data.data.hijri.year);
-
-			fetch(`https://api.aladhan.com/v1/hToG/01-09-${IslYear}`)
-				.then((res => res.json()))
-				.then((data) => {
-					feestdagen.push({ month: parseInt(data.data.gregorian.month.number), date: parseInt(data.data.gregorian.day), text: 'Ramadan' });
-
-					fetch(`https://api.aladhan.com/v1/hToG/01-09-${IslYear + 1}`)
-						.then((res => res.json()))
-						.then((data) => {
-
-							if (parseInt(data.data.gregorian.year) == year) {
-								feestdagen.push({ month: parseInt(data.data.gregorian.month.number), date: parseInt(data.data.gregorian.day), text: 'Ramadan' });
-
-							}
-						})
 
 
-					// sorteer feestdagen naar datum en maak selectievenster 
+					/* sorteer feestdagen naar datum en maak selectievenster 
 
 					feestdagen.sort((a, b) =>
 						(a.month > b.month) ? 1 :
@@ -116,12 +96,14 @@ function GetRamadanAndSortSelection() {
 							document.getElementById('dagen').appendChild(newOption);
 
 						})
+							
 				})
 		})
 }
 
-GetRamadanAndSortSelection()
+*/
 
+/*
 function bepaalFeestdag(sel) {
 
 	let d = document.getElementById("dagen").value;
@@ -140,7 +122,7 @@ function bepaalFeestdag(sel) {
 		(zie https://neilsteventon.wordpress.com/2014/11/17/javascript-new-date-nan-on-iphone/ 
 		*/
 
-		for (let i = 0; i < feestdagen.length; i++) {
+	/*	for (let i = 0; i < feestdagen.length; i++) {
 
 			if (feestdagen[i].text === sel.options[sel.selectedIndex].text) {
 
@@ -161,6 +143,7 @@ function bepaalFeestdag(sel) {
 				// en duurt nog ${Math.floor(dagtellerjl+1)} dagen (in ${jaar+1}).`}
 
 				//dag al geweest in lopende jaar 
+				/*
 				else if (dagteller < -2) {
 
 					for (let i = 0; i < feestdagen.length; i++) {
@@ -174,7 +157,7 @@ function bepaalFeestdag(sel) {
 					}
 				}
 
-				//morgen
+				/*morgen
 				else if (dagteller < 1 && dagteller > 0) {
 					schrijfdag.innerHTML = `${sel.options[sel.selectedIndex].text} is morgen ofwel nog ${Math.floor(dagteller + 1)} nachtje slapen.`;
 				}
@@ -198,73 +181,10 @@ function bepaalFeestdag(sel) {
 			}
 		}
 	}
+	*/
 
-	function calculateRamadan() {
-		const month = new Date().getMonth() + 1;
-
-		fetch(`https://api.aladhan.com/v1/gToH/${new Date().getDate()}-${month}-${year}`)
-			.then((res) => res.json())
-			.then((data) => {
-
-				const IslYear = parseInt(data.data.hijri.year);
-				const IslMonth = parseInt(data.data.hijri.month.number);
-
-				fetch(`https://api.aladhan.com/v1/hToG/01-09-${IslYear}`)
-					.then((res => res.json()))
-					.then((data) => {
-
-						const countDaysTillRamadan = Math.ceil((new Date(year, data.data.gregorian.month.number - 1, parseInt(data.data.gregorian.day)) - today) / 86400000);
-						// schrijfdag.innerHTML+= `Ramadan begint op ${parseInt(data.data.gregorian.day)} ${months[data.data.gregorian.month.number-1]} (over ${countDaysTillRamadan} dagen) `;
-
-
-						fetch(`https://api.aladhan.com/v1/hToG/01-10-${IslYear}`)
-							.then((res => res.json()))
-							.then((datas) => {
-
-								if (IslMonth == 9) {
-									schrijfdag.innerHTML = `Het is nu Ramadan (begonnen op ${parseInt(data.data.gregorian.day)} ${months[data.data.gregorian.month.number - 1]}; 
-		eindigt op ${parseInt(datas.data.gregorian.day - 1)} ${months[datas.data.gregorian.month.number - 1]} (Suikerfeest).`;
-								}
-
-
-								else if (new Date(year, data.data.gregorian.month.number - 1, parseInt(data.data.gregorian.day)).getTime() - today > 0) {
-
-									schrijfdag.innerHTML =
-										`Ramadan begint op ${parseInt(data.data.gregorian.day)} ${months[data.data.gregorian.month.number - 1]} (over ${countDaysTillRamadan} dagen)
-	en eindigt op ${parseInt(datas.data.gregorian.day - 1)} ${months[datas.data.gregorian.month.number - 1]} (Suikerfeest).<br>`;
-								}
-
-								else if (new Date(year, datas.data.gregorian.month.number - 1, parseInt(datas.data.gregorian.day)).getTime() - today < 0) {
-
-									schrijfdag.innerHTML = `Ramadan was van ${parseInt(data.data.gregorian.day)} ${months[data.data.gregorian.month.number - 1]} tot
-		${parseInt(datas.data.gregorian.day - 1)} ${months[datas.data.gregorian.month.number - 1]}.`;
-								}
-							}
-
-							)
-					})
-
-				fetch(`https://api.aladhan.com/v1/hToG/01-09-${IslYear + 1}`)
-					.then((res => res.json()))
-					.then((data) => {
-
-						if (parseInt(data.data.gregorian.year) == year) {
-							schrijfdag.innerHTML += `Daarnaast in dit jaar op ${parseInt(data.data.gregorian.day)} ${months[data.data.gregorian.month.number - 1]}; `;
-
-							fetch(`https://api.aladhan.com/v1/hToG/01-10-${IslYear + 1}`)
-								.then((res => res.json()))
-								.then((data) => {
-									schrijfdag.innerHTML += `einde op ${parseInt(data.data.gregorian.day - 1)} ${months[data.data.gregorian.month.number - 1]}.<br>`;
-								})
-						}
-
-
-					})
-
-			});
-	}
-
-
+	
+/*
 	function calculatePrinsjesdag() {
 
 		const datePrinsjesdag = new Date(year, 8, Prinsjesdag).getTime();
@@ -293,15 +213,15 @@ function bepaalFeestdag(sel) {
 			schrijfdag.innerHTML = textPrinsjesdag + ` is nog ${Math.floor((datePrinsjesdag - today) / 86400000)} nachtjes slapen.`
 		}
 	}
-}
+*/
 
 
 // Deel 2: dag achterhalen en historische gebeurtenissen 
 
+/*
 datumkiezer.addEventListener('change', () => berekendag())
 maandkiezer.addEventListener('change', () => berekendag());
 jaarkiezer.addEventListener('change', () => berekendag());
-
 
 const specialDates = [
 	{
@@ -340,8 +260,9 @@ const specialDates = [
 
 ]
 
+
 function berekendag() {
-	document.getElementById('onthisday').style.display = 'none';
+	//document.getElementById('onthisday').style.display = 'none';
 	document.getElementById('specialdates').innerHTML = '';
 
 	let datum = seldate.selectedIndex + 1;
@@ -383,15 +304,18 @@ function berekendag() {
 
 			: dagenverschil.innerHTML = '';
 
-		getEventsOnDate();
+	
 
 	}
 }
+		*/
+
+	// getEventsOnDate();
 
 document.addEventListener('DOMContentLoaded', getEventsOnDate);
 
 function getEventsOnDate() {
-	document.querySelector('.color2').style.height = '33vh';
+	// document.querySelector('.color2').style.height = '33vh';
 	const filterSpecialDates = specialDates.filter(sd => sd.date.split('-')[0] == seldate.selectedIndex + 1 &&
 		sd.date.split('-')[1] == selmonth.selectedIndex + 1)
 	if (filterSpecialDates.length > 0) {
@@ -453,106 +377,4 @@ function getEventsOnDate() {
 }
 
 
-// Deel 3: countdown tot eerstvolgende testalarm op 1e maandag van de maand 12 uur Nederlandse tijd 
-
-function firstMondayinMonth() {
-
-	let nextMonth = (new Date().getMonth()) + 1;
-	let nextYear = year + 1;
-
-	if (nextMonth > 11) { nextMonth == 0; year == nextYear; }
-
-	const dayOfFirstDayInMonth = new Date(year, new Date().getMonth(), 1).getDay()
-	const diffFirstDayInMonthToMonday = dayOfFirstDayInMonth - 1;
-
-	let firstMondayInMonth = 7 - diffFirstDayInMonthToMonday + 1
-	if (firstMondayInMonth > 7) {
-		firstMondayInMonth -= 7
-	}
-
-	const dayOfFirstDayInNextMonth = new Date(year, nextMonth, 1).getDay()
-	const diffFirstDayInNextMonthToMonday = dayOfFirstDayInNextMonth - 1;
-	let firstMondayInMonthNextMonth = 7 - diffFirstDayInNextMonthToMonday + 1
-	if (firstMondayInMonthNextMonth > 7) {
-		firstMondayInMonthNextMonth -= 7
-	}
-
-	async function getTimeAmsterdam() {
-		let apiUrl = `https://time.now/developer/api/timezone/Europe/Amsterdam`;
-
-		try {
-			const res = await fetch(apiUrl, { method: 'GET' });
-			const data = await res.json()
-			const hourAmsterdam = parseInt(data.datetime.split('T')[1].slice(0, 2));
-
-			(data.dst) ?
-				hourTestalarm = 10 + (new Date().getTimezoneOffset(hourAmsterdam) / -60) :
-				hourTestalarm = 11 + (new Date().getTimezoneOffset(hourAmsterdam) / -60)
-
-			let testAlarm = new Date(year, (new Date().getMonth()), firstMondayInMonth, hourTestalarm);
-			let testAlarmNextMonth = new Date(year, nextMonth, firstMondayInMonthNextMonth, hourTestalarm);
-			let testAlarmJanNextYear = new Date((year + 1), 0, firstMondayInMonthNextMonth, hourTestalarm);
-
-			((testAlarm.getTime() + 86000) > today) ? sirene = testAlarm :
-				sirene = testAlarmNextMonth;
-
-			if (sirene.getTime() + 86000 - today < 0) {
-				sirene = testAlarmJanNextYear;
-			}
-
-			let time = (sirene - today) / 1000;
-
-			function showCountDown() {
-				let days = Math.floor(time / (3600 * 24));
-				let restday = time % (3600 * 24);
-				let hours = Math.floor(restday / 3600);
-				let resthour = restday % 3600;
-				let minutes = Math.floor(resthour / 60);
-				if (minutes < 10) {
-					minutes = '0' + Math.floor(resthour / 60);
-				}
-
-				let seconds = Math.floor(resthour - minutes * 60).toFixed(0);
-				if (seconds < 10) {
-					seconds = '0' + Math.floor(resthour % 60);
-				}
-
-				let text =
-					time <= 0 ?
-						`Alarm gaat af...` :
-						(days === 0) ?
-							`${hours}:${minutes}:${seconds}` :
-							(days === 1) ?
-								`${days} dag ${hours}:${minutes}:${seconds}` :
-								`${days} dagen ${hours}:${minutes}:${seconds}`
-
-				document.getElementById('countdown').textContent = `(${sirene.getDate()} ${months[sirene.getMonth()]} ${year})`
-				document.getElementById('nextFirstMondayinMonth').innerHTML = `<strong>${text}</strong>`;
-				time--
-			}
-
-			showCountDown();
-
-			let runCountdown = setInterval(() => {
-				showCountDown();
-
-				if (time <= -86) {
-					clearInterval(runCountdown);
-					firstMondayinMonth();
-				}
-
-			}
-				, 1000)
-
-		}
-
-		catch (error) { console.log(error) }
-
-	}
-
-	getTimeAmsterdam()
-
-}
-
-firstMondayinMonth();
 

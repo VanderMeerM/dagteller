@@ -8,78 +8,64 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="./dagteller.css" rel="stylesheet" type="text/css" />
-  <script defer src="./dagteller.js"></script>
+  <link href="./assets/dagteller.css" rel="stylesheet" type="text/css" />
+ <!-- <script defer src="./assets/JS/ramadan.js"></script> --> 
+  <script defer src="./assets/JS/countdown.js"></script>
+
+  <script defer src="./assets/JS/dagteller.js"></script>
 
 </head>
 
 <?php 
 
-echo '
+// Wishlist: Ramadan toevoegen 
 
+// Enkele variabelen 
+
+// Array met vaste data.. 
+
+$feestdagen = array (
+	array ("month" => 1, "date" => 1, "text" => 'Nieuwjaarsdag'),
+  array ("month" => 4, "date" => 27, "class" => "orange", "text" => 'Koningsdag'),
+  array ("month" => 5, "date" => 5, "class" => "orange", "text" => 'Bevrijdingsdag'),
+  array ("month" => 11, "date" => 3, "class" => "orange", "text" => 'Mijn verjaardag'),
+	array ("month" => 12, "date" => 5, "text" => 'Sinterklaas'),
+	array ("month" => 12, "date" => 25, "text" => 'Kerst'),
+	array ("month" => 12, "date" => 31, "text" => 'Oudjaar')
+);
+
+$array_filter_sp = []; 
+
+$days = ['', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'];
+$months = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
+
+$date_today = date('d-m-Y');
+$current_year = date('Y'); 
+$Easter = date('d-m-Y', easter_date($currentYear)); 
+$prinsjesdag; 
+
+echo '
 <body>
 
   <div class="color1">
 
-    <h2> Hoeveel dagen resteren / is het geleden tot de geselecteerde feestdag in het lopende jaar <nav
-        style="display: inline" id="currentyear">
-      </nav> <br>
-      En op welke dag valt/viel die dag?
-    </h2>
+    <h2> Hoeveel dagen resteren / is het geleden tot de geselecteerde feestdag in het lopende jaar ('. $current_year . ') ?<br>
 
+      En op welke dag valt / viel die dag?
+    </h2>';
 
-    <select id="dagen" onchange="bepaalFeestdag(this);">
+include('./assets/select_day.php');
 
-    </select>
-
-    <main>
-
-      <p>
-      <div id="schrijfdag"></div>
-      </p>
-
-  </div>';
-
-  $currentYear = date('Y');
-  $Easter = date('M-d-Y', easter_date($currentYear)); 
-
-  ?>
-   
-  <script> 
-  const Easter = <?php echo json_encode($Easter) ?>;
-
-  </script>
+  echo '
   
-  <?php 
+  <div class="color2">
 
-  echo 
+    <h2> Of voer een eigen datum in om de dag te achterhalen...</h2>'; 
+
+    include ('./assets/get_day.php');
+
   
-  '<div class="color2">
-
-    <h2> Of voer een eigen datum in om de dag te achterhalen...</h2>
-
-    <div class="tooneigeninvoer">
-      <div id="datumkiezer"></div>
-      <div id="maandkiezer"></div>
-      <input type="number" id="jaarkiezer" min="1900">
-
-      <br>
-      <p>
-      <div id="toondag"> </div>
-      <div id="dagenverschil"> </div>
-
-      <div id="onthisday">Op deze dag in...<p></p>
-      </div>
-      <div id="specialdates"></div>
-      </p>
-
-      <audio id="sound" type="audio/mpeg"></audio>
-
-    </div>
-
-  </div>
-
- 
+  echo '
 
   <div class="color3">
 
