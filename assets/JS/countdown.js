@@ -2,6 +2,7 @@
 // Deel 3: countdown tot eerstvolgende testalarm op 1e maandag van de maand 12 uur Nederlandse tijd 
 
 const today = new Date().getTime();
+const months = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
 const year = new Date(today).getFullYear();
 
 function firstMondayinMonth() {

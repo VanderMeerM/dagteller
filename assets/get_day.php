@@ -162,16 +162,20 @@ echo '
 
 let blinkOnThisDay = setInterval(showBlinking, 300);
 
+let onThisDay = document.getElementById('onthisday');
+
 		function showBlinking() {
-			document.getElementById('onthisday').classList.toggle('unvisible');
-			document.getElementById('onthisday').style.display = 'block';
+
+        if (onThisDay) {
+			onThisDay.classList.toggle('unvisible');
+			onThisDay.style.display = 'block';
 		}
 
 		setTimeout(stopBlinking, 2400);
 
 		function stopBlinking() {
 			clearInterval(blinkOnThisDay);
-		}
+		}}
 
 </script>
 
