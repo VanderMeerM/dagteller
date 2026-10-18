@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="./assets/dagteller.css" rel="stylesheet" type="text/css" />
  <!-- <script defer src="./assets/JS/ramadan.js"></script> --> 
-  <script defer src="./assets/JS/countdown.js"></script>
+  <script defer src="./assets/JS/countdown.js"></script> 
 
 </head>
 
