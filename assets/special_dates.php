@@ -55,7 +55,7 @@ $special_dates = array (
 		"date" => '14-4-1912', 
     "event" => 'Ramp met de Titanic', 
     "link" => 'Titanic_(schip,_1912)', 
-    "image" => 'Titanic.jpg'
+    "image" => 'Titanic.png'
     ),
 
   array(	
