@@ -88,7 +88,7 @@ array_push($feestdagen_chr_NL_sorted, $lib_day);
 
 // ..Hemelvaart & Pinksteren.. 
 
-array_push($feestdagen_chr_NL_sorted, $chr_feestdagen);
+array_push($feestdagen_chr_NL_sorted, $chr_feestdagen[0], $chr_feestdagen[1]);
 
 // Zet alles bij elkaar...
 
