@@ -9,63 +9,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="./assets/dagteller.css" rel="stylesheet" type="text/css" />
-  <!--<script defer src="./assets/JS/ramadan.js"></script> -->
   <script defer src="./assets/JS/countdown.js"></script> 
 
 </head>
 
 <?php 
 
-// Wishlist: Ramadan toevoegen 
-
-// Enkele variabelen 
-
-// Array met vaste data.. 
-
-$feestdagen = array (
-	array ("month" => 1, "date" => 1, "text" => 'Nieuwjaarsdag'),
-  array ("month" => 4, "date" => 27, "class" => "orange", "text" => 'Koningsdag'),
-  array ("month" => 5, "date" => 5, "class" => "orange", "text" => 'Bevrijdingsdag'),
-  array ("month" => 11, "date" => 3, "class" => "orange", "text" => 'Mijn verjaardag'),
-	array ("month" => 12, "date" => 5, "text" => 'Sinterklaas'),
-	array ("month" => 12, "date" => 25, "text" => 'Kerst'),
-	array ("month" => 12, "date" => 31, "text" => 'Oudjaar')
-);
-
-include ('./assets/get_ramadan_date.php');
-
-array_push($feestdagen, array("month" => intval(explode('-', $start_ramadan)[1]), 
-"date" => intval(explode('-', $start_ramadan)[0]), "text" => 'Ramadan'));
-
-//print_r($feestdagen);
-
-$feestdagen_bf_ramadan = [];
-$feestdagen_at_ramadan = [];
-
-for ($i=0; $i <sizeof($feestdagen); $i++) {
-
-   if ($feestdagen[$i]['month'] <= intval(explode('-', $start_ramadan)[1])) 
-   {
-     array_push($feestdagen_bf_ramadan, $feestdagen[$i]);
-    }
-    else {
-         array_push($feestdagen_at_ramadan, $feestdagen[$i]);
-    }
-}
-
-$feestdagen = array_merge($feestdagen_bf_ramadan, $feestdagen_at_ramadan);
-
-
-$array_filter_sp = []; 
-
-$days = ['', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'];
-$months = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
-
-$date_today = date('d-m-Y');
-$current_year = date('Y'); 
-$Easter = date('d-m-Y', easter_date($currentYear)); 
-$prinsjesdag; 
-$start_ramadan;
+include ('./assets/sort_days.php');
 
 echo '
 <body>

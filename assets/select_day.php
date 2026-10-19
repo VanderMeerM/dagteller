@@ -1,52 +1,6 @@
 
 <?php 
 
-// Prinsjesdag..
-
-$date_ps = date_create();
-date_date_set($date_ps, $current_year,9,1);
-$first_september = date_format($date_ps,"d-m-Y");
-
-$diff_first_tuesday_september = date('N', strtotime($first_september)) - 2;
-
-($diff_first_tuesday_september > 0) ?
-	$prinsjesdag = 22 - $diff_first_tuesday_september :
-	$prinsjesdag = 15 - $diff_first_tuesday_september;
-
-
-// Hemelvaart & Pinksteren 
-
-$ascension_day = date('d-m-Y', (strtotime($Easter) + (39 * 24 * 3600)));
-$penteCost = date('d-m-Y', (strtotime($Easter) + (49 * 24 * 3600))); // + (49 * 86400000))));
-
-
-//print_r($feestdagen);
-
-// Pasen, Hemelvaart, Pinksteren & Prinsjesdag op goede plek in selectie met feestdagen zetten.. 
-
-$feestdagen_bf_sept = [];
-$feestdagen_at_sept = [];
-
-for ($i=0; $i <sizeof($feestdagen); $i++) {
-
-    if ($feestdagen[$i]['month'] < 9) {
-        array_push($feestdagen_bf_sept, $feestdagen[$i]);
-    }
-    else {
-         array_push($feestdagen_at_sept, $feestdagen[$i]);
-    }
-}
-
-array_push($feestdagen_bf_sept, 
-
-array("month" => (date('n', strtotime($Easter))), "date" => intval((date('d', strtotime($Easter)))), "text" => 'Pasen'),
-array("month" => (date('n', strtotime($ascension_day))), "date" => (date('d', strtotime($ascension_day))), "text" => 'Hemelvaart'),
-array("month" => (date('n', strtotime($penteCost))), "date" => (date('d', strtotime($penteCost))), "text" => 'Pinksteren'),
-array("month" => 9, "date" => $prinsjesdag, "text" => 'Prinsjesdag')
-);
-
-$feestdagen = array_merge($feestdagen_bf_sept, $feestdagen_at_sept);
-
 
 echo '
     <form method="post"> 
@@ -55,8 +9,11 @@ echo '
     <option label="Selecteer feestdag" disabled selected>Selecteer feestdag</option>';
 
     foreach ($feestdagen as $fd) {
+
+    if ( (!empty($fd['date'])) && (!empty($fd['month'])) ) {
         echo '<option value = "'.$fd['date'].'-'.$fd['month'].'-'. $fd['text'].'" style="color: '.$fd['class'].'">'. $fd['text'] . '</option>';
     } 
+    }
 
 echo '</select>
 
@@ -71,6 +28,9 @@ echo '</select>
         date_date_set($date_fs, $current_year,(explode('-', $_POST['feestdag'])[1]), (explode('-', $_POST['feestdag'])[0]));
         $date_set_ts = strtotime(date_format($date_fs, 'd-m-Y')); 
 
+         if (explode('-', $_POST['feestdag'])[2] === 'Ramadan') {
+            text_ramadan();
+        } else {
 
         // Vandaag 
 
@@ -107,11 +67,35 @@ echo '</select>
           . (explode('-', $_POST['feestdag'])[0]) . ' ' . $months[((explode('-', $_POST['feestdag'])[1])-1)] .') is nog ' . round( ($date_set_ts - strtotime($date_today)) / 86400) . ' nachtjes slapen en valt op ' . $days[date('N', $date_set_ts)] . '.';
         };
           
-    }
+    }}
+
   
 echo '
    </div>
    </div>';
+
+   function text_ramadan() {
+       
+    $date_fs = date_create();
+    date_date_set($date_fs, date('Y'),(explode('-', $_POST['feestdag'])[1]), (explode('-', $_POST['feestdag'])[0]));
+    $date_set_ts = strtotime(date_format($date_fs, 'd-m-Y')); 
+    
+    $start_ramadan = date('d-m-Y', $date_set_ts);
+    $begins;
+    $ends;
+   
+   if (strtotime(date('d-m-Y')) > date($date_set_ts)) {
+    $begins = 'begon';
+    $ends = 'eindigde';
+    } else {
+    $begins= 'begint'; 
+    $ends = 'eindigt';
+    }
+
+      
+   echo 'Ramadan '. $begins . ' op ' . $start_ramadan . ' en '. $ends .' op niet bekend.';
+
+    }
 
    ?>
 

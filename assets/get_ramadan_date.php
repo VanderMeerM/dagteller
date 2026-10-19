@@ -38,11 +38,11 @@ $isl_year = $response_gtoh['data'];
 
 // Begin aankomende Ramadan bepalen...
 
-function getRamadan($year) {
+function getRamadan($year, $month) {
     
 $curl_st_ram = curl_init();
 
-$cur_url_st_ram = 'https://api.aladhan.com/v1/hToG/01-09-'.$year.'?calendarMethod=UAQ';
+$cur_url_st_ram = 'https://api.aladhan.com/v1/hToG/01-'.$month.'-'.$year.'?calendarMethod=UAQ';
 
 curl_setopt_array($curl_st_ram, array(
   CURLOPT_URL => $cur_url_st_ram,
@@ -65,12 +65,15 @@ return $response_st_ram['data']['gregorian']['date'];
 
 }
 
-$start_ramadan = getRamadan($isl_year);
+$start_ramadan = getRamadan($isl_year, 9);
+$end_ramadan = getRamadan($isl_year, 10);
 
 if ( date('Y', strtotime($response_st_ram['data']['gregorian']['date'])) != date('Y')) {
-  $start_ramadan = getRamadan($isl_year-1);
+  $start_ramadan = getRamadan(($isl_year-1), 9);
+  $end_ramadan = getRamadan(($isl_year-1), 10);
 } else {
- $start_ramadan = getRamadan($isl_year);
+ $start_ramadan = getRamadan($isl_year, 9);
+ $end_ramadan = getRamadan(($isl_year-1), 10);
 };
 
 
