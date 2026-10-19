@@ -9,7 +9,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="./assets/dagteller.css" rel="stylesheet" type="text/css" />
- <!-- <script defer src="./assets/JS/ramadan.js"></script> --> 
+  <!--<script defer src="./assets/JS/ramadan.js"></script> -->
   <script defer src="./assets/JS/countdown.js"></script> 
 
 </head>
@@ -32,6 +32,30 @@ $feestdagen = array (
 	array ("month" => 12, "date" => 31, "text" => 'Oudjaar')
 );
 
+include ('./assets/get_ramadan_date.php');
+
+array_push($feestdagen, array("month" => intval(explode('-', $start_ramadan)[1]), 
+"date" => intval(explode('-', $start_ramadan)[0]), "text" => 'Ramadan'));
+
+//print_r($feestdagen);
+
+$feestdagen_bf_ramadan = [];
+$feestdagen_at_ramadan = [];
+
+for ($i=0; $i <sizeof($feestdagen); $i++) {
+
+   if ($feestdagen[$i]['month'] <= intval(explode('-', $start_ramadan)[1])) 
+   {
+     array_push($feestdagen_bf_ramadan, $feestdagen[$i]);
+    }
+    else {
+         array_push($feestdagen_at_ramadan, $feestdagen[$i]);
+    }
+}
+
+$feestdagen = array_merge($feestdagen_bf_ramadan, $feestdagen_at_ramadan);
+
+
 $array_filter_sp = []; 
 
 $days = ['', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'];
@@ -41,6 +65,7 @@ $date_today = date('d-m-Y');
 $current_year = date('Y'); 
 $Easter = date('d-m-Y', easter_date($currentYear)); 
 $prinsjesdag; 
+$start_ramadan;
 
 echo '
 <body>
@@ -52,22 +77,17 @@ echo '
       En op welke dag valt / viel die dag?
     </h2>';
 
+
 include('./assets/select_day.php');
 
-  echo '
-  
-  <div class="color2">
-
-    <h2> Of voer een eigen datum in om de dag te achterhalen...</h2>'; 
-
-    include ('./assets/get_day.php');
+include ('./assets/get_day.php');
 
   
   echo '
 
   <div class="color3">
 
-    <h2 style="margin-bottom: 0px">
+    <h2>
       Countdown tot het eerstvolgende testalarm 
       <div id="countdown" style="display: inline;"></div> *
     </h2>';

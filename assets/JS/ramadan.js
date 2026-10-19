@@ -1,8 +1,10 @@
 
 //Ramadan 
 
+let feestdagen = [];
 
-function GetRamadanAndSortSelection() {
+function GetRamadan() {
+
 	fetch(`https://api.aladhan.com/v1/gToH/${new Date().getDate()}-${new Date().getMonth() + 1}-${new Date().getFullYear()}`)
 		.then((res) => res.json())
 		.then((data) => {
@@ -27,9 +29,11 @@ function GetRamadanAndSortSelection() {
                         					
 				})
 		})
+
+		console.log(feestdagen);
 }
 
-GetRamadanAndSortSelection()
+GetRamadan()
 
 function calculateRamadan() {
 		const month = new Date().getMonth() + 1;

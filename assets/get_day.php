@@ -6,7 +6,27 @@
 
  include ('./assets/special_dates.php');
 
+  // Controleren op gebeurtenissen op de geselecteerde datum... 
+
+       for ($i=0; $i < sizeof($special_dates); $i++) {
+
+       if ( 
+        ($_POST['select_date'] == explode('-', $special_dates[$i]['date'])[0] && 
+        $_POST['select_month'] == explode('-', $special_dates[$i]['date'])[1] ))
+        
+        {
+       array_push($array_filter_sp, $special_dates[$i]);
+
+       }
+       }
+
+// Datum selecteren en dag bepalen...
+
 echo '
+
+<div class="color2" '. (sizeof($array_filter_sp) == 0 ? 'style=height:33vh;': null) . '>
+
+<h2> Of voer een eigen datum in om de dag te achterhalen...</h2>
 
  <div class="tooneigeninvoer">
 
@@ -65,40 +85,30 @@ echo '
         $day_difference = strtotime($date_today) - $date_set_sel_day; 
   
        if ($day_difference == 0) {
-            $num_days = 'is vandaag'; 
+            $num_days = ' (is vandaag)'; 
         } 
         else if ($day_difference == 86400) {
-            $num_days = 'was gisteren'; 
+            $num_days = ' (was gisteren)'; 
         } 
         else if ( ($day_difference * -1) == 86400) {
-            $num_days = 'is morgen'; 
+            $num_days = ' (is morgen)'; 
         }
-         else if ($day_difference > 86400) {
-            $num_days = ''. round($day_difference/86400) .' dagen geleden'; 
+         else if ( ($day_difference > 86400) && ($current_year == $_POST['select_year']) ){
+            $num_days = ' ('. round($day_difference/86400) .' dagen geleden)'; 
         } 
-         else if (($day_difference * -1) > 86400) {
-            $num_days = 'over '. round(($day_difference/86400) * -1) .' dagen'; 
+         else if ( (($day_difference * -1) > 86400) && ($current_year == $_POST['select_year']) ){
+            $num_days = ' (over '. round(($day_difference/86400) * -1) .' dagen)'; 
         }     
 
         ($date_set_sel_day >= strtotime($date_today) ? $valt = 'valt' : $valt= 'viel');
 
-        echo '<div id="toondag"> ' . $_POST['select_date'] . ' ' . $months[$_POST['select_month']-1] . ' ' . $_POST['select_year'] . ' ' .$valt. ' op ' . $days[date('N', $date_set_sel_day)] . ' ('. $num_days. '). </div>';
+        echo '<div id="toondag"> ' . $_POST['select_date'] . ' ' . $months[$_POST['select_month']-1] . ' ' . $_POST['select_year'] . ' ' .$valt. ' op ' . $days[date('N', $date_set_sel_day)] . $num_days. '.</div>';
         
         }
        }
 
-       for ($i=0; $i < sizeof($special_dates); $i++) {
-
-       if ( 
-        ($_POST['select_date'] == explode('-', $special_dates[$i]['date'])[0] && 
-        $_POST['select_month'] == explode('-', $special_dates[$i]['date'])[1] ))
-        
-        {
-       array_push($array_filter_sp, $special_dates[$i]);
-
-       }
-       }
-
+    // Speciale gebeurtenis(sen) tonen (indien ze er zijn)...
+      
        if (sizeof($array_filter_sp) > 0) {
 
       echo '
@@ -137,7 +147,8 @@ echo '
     }
     
     echo '
-     </div></div>';
+     </div>
+     </div>';
 
     }
 
@@ -146,14 +157,7 @@ echo '
      </div>';
        }
 
-       else {
-        ?>
-        <script>
-    	document.querySelector('.color2').style.height = '33vh';
-        </script>
-        <?php
-       }
-       
+      
      echo '
      </div>';
 ?>
@@ -180,6 +184,9 @@ let onThisDay = document.getElementById('onthisday');
 </script>
 
  <script>
+
+// Selectie aanhouden..
+
 let selectedYear = <?php echo json_encode($_POST['select_year']); ?>
 </script>
 

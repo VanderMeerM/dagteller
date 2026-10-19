@@ -20,6 +20,8 @@ $ascension_day = date('d-m-Y', (strtotime($Easter) + (39 * 24 * 3600)));
 $penteCost = date('d-m-Y', (strtotime($Easter) + (49 * 24 * 3600))); // + (49 * 86400000))));
 
 
+//print_r($feestdagen);
+
 // Pasen, Hemelvaart, Pinksteren & Prinsjesdag op goede plek in selectie met feestdagen zetten.. 
 
 $feestdagen_bf_sept = [];
@@ -37,7 +39,7 @@ for ($i=0; $i <sizeof($feestdagen); $i++) {
 
 array_push($feestdagen_bf_sept, 
 
-array("month" => (date('n', strtotime($Easter))), "date" => (date('d', strtotime($Easter))), "text" => 'Pasen'),
+array("month" => (date('n', strtotime($Easter))), "date" => intval((date('d', strtotime($Easter)))), "text" => 'Pasen'),
 array("month" => (date('n', strtotime($ascension_day))), "date" => (date('d', strtotime($ascension_day))), "text" => 'Hemelvaart'),
 array("month" => (date('n', strtotime($penteCost))), "date" => (date('d', strtotime($penteCost))), "text" => 'Pinksteren'),
 array("month" => 9, "date" => $prinsjesdag, "text" => 'Prinsjesdag')
@@ -45,27 +47,6 @@ array("month" => 9, "date" => $prinsjesdag, "text" => 'Prinsjesdag')
 
 $feestdagen = array_merge($feestdagen_bf_sept, $feestdagen_at_sept);
 
-
-// Ramadan.. 
-
-function get_Ramadan_date() {
-
-$date = date('d-m-Y');
-
-$curl = curl_init();
-
-$curl_url = 'https://api.aladhan.com/v1/gToH/'.$date.'?calendarMethod=UAQ';
-
-curl_setopt_array($curl, array(
-  CURLOPT_URL => $curl_url,  
-  CURLOPT_CUSTOMREQUEST => 'GET'
- ));
-
-$response = curl_exec($curl);
-
-}
-
-//get_Ramadan_date();
 
 echo '
     <form method="post"> 

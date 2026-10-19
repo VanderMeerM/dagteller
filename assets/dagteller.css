@@ -78,8 +78,8 @@ select option {
 /* item 1 */
 
 .color1 {
-	height: auto;
-	background-color: #565b60;
+	height: 33vh;
+	background-color: #6c89a6;
 }
 
 .color1,
@@ -91,7 +91,7 @@ select option {
 /* item 2 */ 
 
 .color2 {
-	background-color: #676374;
+	background-color: #768b5c;
 	padding: 10px 0 40px;
 }
 
@@ -161,7 +161,7 @@ input {
 
 .color3 {
 	height: 33vh;
-	background-color: #717171;
+	background-color: #734c4c;
 	padding: 20px;
 }
 
