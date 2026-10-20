@@ -42,7 +42,7 @@ function getRamadan($year, $month) {
     
 $curl_st_ram = curl_init();
 
-$cur_url_st_ram = 'https://api.aladhan.com/v1/hToG/01-'.$month.'-'.$year.'?calendarMethod=UAQ';
+$cur_url_st_ram = 'https://api.aladhan.com/v1/hToG/01-'.$month.'-'. $year .'?calendarMethod=UAQ';
 
 curl_setopt_array($curl_st_ram, array(
   CURLOPT_URL => $cur_url_st_ram,

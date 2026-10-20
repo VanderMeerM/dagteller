@@ -43,7 +43,7 @@ include ('./assets/get_day.php');
     </h2>';
 
 ?>
-    <div style="color: #ECCFAE">
+    <div class="based_on">
       * gebaseerd op de eerste maandag van de maand om 12 uur 's middags Nederlandse tijd
     </div>
   

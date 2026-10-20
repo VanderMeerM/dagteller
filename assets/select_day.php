@@ -29,7 +29,7 @@ echo '</select>
         $date_set_ts = strtotime(date_format($date_fs, 'd-m-Y')); 
 
          if (explode('-', $_POST['feestdag'])[2] === 'Ramadan') {
-            text_ramadan();
+            text_ramadan($end_ramadan, $months);
         } else {
 
         // Vandaag 
@@ -74,7 +74,7 @@ echo '
    </div>
    </div>';
 
-   function text_ramadan() {
+   function text_ramadan($enddate, $months) {
        
     $date_fs = date_create();
     date_date_set($date_fs, date('Y'),(explode('-', $_POST['feestdag'])[1]), (explode('-', $_POST['feestdag'])[0]));
@@ -83,17 +83,39 @@ echo '
     $start_ramadan = date('d-m-Y', $date_set_ts);
     $begins;
     $ends;
+
+    $end_ramadan = strtotime($enddate);
    
-   if (strtotime(date('d-m-Y')) > date($date_set_ts)) {
+ 
+   // Huidige datum na einddatum...
+
+   if (strtotime(date('d-m-Y')) > $end_ramadan) {
     $begins = 'begon';
     $ends = 'eindigde';
-    } else {
+    }
+    
+    // Huidige datum voor begindatum... 
+
+    else if (strtotime(date('d-m-Y')) < date($date_set_ts)) {
     $begins= 'begint'; 
     $ends = 'eindigt';
     }
 
+    else {
+    $begins = 'begon';
+    $ends = 'eindigt';
+    }
+
+    /*
+// Huidige datum na beginddatum en voor einddatum ...
+
+    if ( (strtotime(date('d-m-Y')) > date($date_set_ts)) && (strtotime(date('d-m-Y')) < $end_ramadan))  {
+    $begins = 'begon';
+    $ends = 'eindigt';
+    }
+    */
       
-   echo 'Ramadan '. $begins . ' op ' . $start_ramadan . ' en '. $ends .' op niet bekend.';
+   echo 'Ramadan '. $begins . ' op ' . intval(explode('-', $start_ramadan)[0]) . ' ' . $months[intval(explode('-', $start_ramadan)[1])-1] . ' en '. $ends .' op '. intval(date('d', $end_ramadan)) . ' ' . $months[intval(date('m', $end_ramadan))-1] . '.';
 
     }
 
