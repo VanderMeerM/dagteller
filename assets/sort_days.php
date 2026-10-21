@@ -103,10 +103,6 @@ array_unshift($feestdagen, $new_years_day);
 
 include ('./assets/get_ramadan_date.php');
 
-array_push($feestdagen, array("month" => intval(explode('-', $start_ramadan)[1]), 
-"date" => intval(explode('-', $start_ramadan)[0]), "text" => 'Ramadan'));
-
-
 // Zet Ramadan op juiste 'plek' in feestdagen..
 
 $feestdagen_bf_ramadan = [];
@@ -114,7 +110,12 @@ $feestdagen_at_ramadan = [];
 
 for ($i=0; $i <sizeof($feestdagen); $i++) {
 
-   if ($feestdagen[$i]['month'] <= intval(explode('-', $start_ramadan)[1])) 
+   if ( 
+    ($feestdagen[$i]['month'] < intval(explode('-', $start_ramadan)[1])) || 
+
+    (($feestdagen[$i]['month'] == intval(explode('-', $start_ramadan)[1])) &&  
+    ($feestdagen[$i]['date'] <= intval(explode('-', $start_ramadan)[0])) ) 
+    ) 
    {
      array_push($feestdagen_bf_ramadan, $feestdagen[$i]);
     }
@@ -122,6 +123,9 @@ for ($i=0; $i <sizeof($feestdagen); $i++) {
          array_push($feestdagen_at_ramadan, $feestdagen[$i]);
     }
 }
+
+array_push($feestdagen_bf_ramadan, array("month" => intval(explode('-', $start_ramadan)[1]), 
+"date" => intval(explode('-', $start_ramadan)[0]), "text" => 'Ramadan'));
 
 $feestdagen = array_merge($feestdagen_bf_ramadan, $feestdagen_at_ramadan);
 
