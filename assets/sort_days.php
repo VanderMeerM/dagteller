@@ -20,7 +20,7 @@ $date_today = date('d-m-Y');
 $current_year = date('Y'); 
 $Easter = date('d-m-Y', easter_date($current_year)); 
 
-$prinsjesdag; 
+//$prinsjesdag; 
 $start_ramadan;
 
 
@@ -36,17 +36,25 @@ $feestdagen_from_sept = array (
 
 // Bepaal datum Prinsjesdag en voeg toe aan bovenstaande array..
 
-$date_ps = date_create();
-date_date_set($date_ps, $current_year,9,1);
-$first_september = date_format($date_ps,"d-m-Y");
+function get_first_tuesday($month, $year) {
+$date_dm = date_create();
+date_date_set($date_dm, $year, $month ,1);
+$first_day_month = date_format($date_dm,"d-m-Y");
 
-$diff_first_tuesday_september = date('N', strtotime($first_september)) - 2;
+$diff_first_day_month = date('N', strtotime($first_day_month)) - 2;
 
-($diff_first_tuesday_september > 0) ?
-	$prinsjesdag = 22 - $diff_first_tuesday_september :
-	$prinsjesdag = 15 - $diff_first_tuesday_september;
+($diff_first_day_month > 0 ) ?
+	$day = 22 - $diff_first_day_month :
+	$day = 15 - $diff_first_day_month;
+    
+    return $day;
+}
 
- array_unshift($feestdagen_from_sept, array("month" => 9, "date" => $prinsjesdag, "text" => 'Prinsjesdag'));
+
+$prinsjesdag = get_first_tuesday (9, $current_year);
+$vierdaagse = get_first_tuesday (7, $current_year);
+
+array_unshift($feestdagen_from_sept, array("month" => 9, "date" => $prinsjesdag, "text" => 'Prinsjesdag'));
  
 
  // Array met 'Nederlandse' feestdagen..
@@ -89,6 +97,10 @@ array_push($feestdagen_chr_NL_sorted, $lib_day);
 // ..Hemelvaart & Pinksteren.. 
 
 array_push($feestdagen_chr_NL_sorted, $chr_feestdagen[0], $chr_feestdagen[1]);
+
+// ..en de Vierdaagse..
+
+array_push($feestdagen_chr_NL_sorted, array("month" => 7, "date" => $vierdaagse, "text" => 'Vierdaagse Nijmegen'));
 
 // Zet alles bij elkaar...
 

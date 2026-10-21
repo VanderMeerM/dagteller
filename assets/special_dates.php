@@ -58,6 +58,13 @@ $special_dates = array (
     "image" => 'Titanic.png'
     ),
 
+    array (
+		"date" => '15-5-2011', 
+    "event" => 'Ajax pakt de 3e ster', 
+    "link" => 'AFC_Ajax', 
+    "image" => 'Ajax.jpg'
+    ),
+
   array(	
 		"date" => '10-5-1940', 
     "event" => 'Nazi-Duitsland valt Nederland binnen', 

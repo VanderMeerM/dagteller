@@ -175,7 +175,7 @@ let onThisDay = document.getElementById('onthisday');
 			onThisDay.style.display = 'block';
 		}
 
-		setTimeout(stopBlinking, 2400);
+		setTimeout(stopBlinking, 2700);
 
 		function stopBlinking() {
 			clearInterval(blinkOnThisDay);
