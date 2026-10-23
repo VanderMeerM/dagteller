@@ -100,7 +100,7 @@ array_push($feestdagen_chr_NL_sorted, $chr_feestdagen[0], $chr_feestdagen[1]);
 
 // ..en de Vierdaagse..
 
-array_push($feestdagen_chr_NL_sorted, array("month" => 7, "date" => $vierdaagse, "text" => 'Vierdaagse Nijmegen'));
+array_push($feestdagen_chr_NL_sorted, array("month" => 7, "date" => $vierdaagse, "text" => 'Vierdaagse'));
 
 // Zet alles bij elkaar...
 
@@ -140,4 +140,14 @@ array_push($feestdagen_bf_ramadan, array("month" => intval(explode('-', $start_r
 "date" => intval(explode('-', $start_ramadan)[0]), "text" => 'Ramadan'));
 
 $feestdagen = array_merge($feestdagen_bf_ramadan, $feestdagen_at_ramadan);
+
+$selected_special_days = array(
+   array("month" => 10, "date" => 4, "text" => 'Dierendag'), 
+   array("month" => 10, "date" => 3, "text" => 'Leids Ontzet & Tag der deutschen Einheit'),
+   array("month" => 5, "date" => 1, "text" => 'Dag van de Arbeid'), 
+   array("month" => 8, "date" => 15, "text" => 'Ferragosto')
+
+);
+
+$found_selected_special_day = array_merge($feestdagen, $selected_special_days);
 

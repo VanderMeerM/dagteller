@@ -15,6 +15,19 @@
 
 <?php 
 
+/* Wishlist 
+
+- afbeeldingen gelijk 
+- omschrijving Vierdaagse (zoals Ramadan)
+- dag selectie blijft niet staan (in middengedeelte) 
+- Tweede Paasdag, Pinksterdag en Kerstdag toevoegen aan 
+array selected_special_days
+- kleuren? 
+
+- vaste dagen elk jaar tonen 
+
+*/
+
 include ('./assets/sort_days.php');
 
 echo '

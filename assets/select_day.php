@@ -66,7 +66,9 @@ echo '</select>
           . (explode('-', $_POST['feestdag'])[0]) . ' ' . $months[((explode('-', $_POST['feestdag'])[1])-1)] .') is nog ' . round( ($date_set_ts - strtotime($date_today)) / 86400) . ' nachtjes slapen en valt op ' . $days[date('N', $date_set_ts)] . '.';
         };
           
-    }}
+    }
+        echo '</div><div><img id="img_symbol" src=./images/symbols/' . explode('-', $_POST['feestdag'])[2] . '.jpeg></div>';    
+    }
 
   
 echo '

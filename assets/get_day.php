@@ -5,10 +5,14 @@
  $num_days;
 
  include ('./assets/special_dates.php');
+ 
+ // Controleren op gebeurtenissen op de geselecteerde datum... 
 
-  // Controleren op gebeurtenissen op de geselecteerde datum... 
-
-       for ($i=0; $i < sizeof($special_dates); $i++) {
+ // checkOnEvents($special_dates);
+   
+ // function checkOnEvents(...$array) {
+     
+    for ($i=0; $i < sizeof($special_dates); $i++) {
 
        if ( 
         ($_POST['select_date'] == explode('-', $special_dates[$i]['date'])[0] && 
@@ -17,8 +21,24 @@
         {
        array_push($array_filter_sp, $special_dates[$i]);
 
-       }
-       }
+       }}
+
+
+        // Controleren of geselecteerde datum feestdag is (in huidige jaar)... 
+
+        for ($i=0; $i < sizeof($found_selected_special_day); $i++) {
+
+       if ( 
+        ($_POST['select_date'] == $found_selected_special_day[$i]['date']) && 
+        $_POST['select_month'] == $found_selected_special_day[$i]['month'] && 
+        $_POST['select_year'] == $current_year )
+        
+        {
+       $found_special_day = '<i>('. $found_selected_special_day[$i]['text'] . ')</i>';
+
+       }}
+      
+    
 
 // Datum selecteren en dag bepalen...
 
@@ -102,7 +122,7 @@ echo '
 
         ($date_set_sel_day >= strtotime($date_today) ? $valt = 'valt' : $valt= 'viel');
 
-        echo '<div id="toondag"> ' . $_POST['select_date'] . ' ' . $months[$_POST['select_month']-1] . ' ' . $_POST['select_year'] . ' ' .$valt. ' op ' . $days[date('N', $date_set_sel_day)] . $num_days. '.</div>';
+        echo '<div id="toondag"> ' . $_POST['select_date'] . ' ' . $months[$_POST['select_month']-1] . ' ' . $_POST['select_year'] . ' ' .$found_special_day. ' ' .$valt. ' op ' . $days[date('N', $date_set_sel_day)] . $num_days. '.</div>';
         
         }
        }
