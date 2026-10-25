@@ -113,7 +113,7 @@ echo '
         else if ( ($day_difference * -1) == 86400) {
             $num_days = ' (is morgen)'; 
         }
-         else if ( ($day_difference > 86400) && ($current_year == $_POST['select_year']) ){
+         else if ( ($day_difference > 86400) && ($current_year == date('Y') )){
             $num_days = ' ('. round($day_difference/86400) .' dagen geleden)'; 
         } 
          else if ( (($day_difference * -1) > 86400) && ($current_year == $_POST['select_year']) ){

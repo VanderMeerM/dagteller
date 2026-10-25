@@ -20,11 +20,11 @@
 - afbeeldingen gelijk 
 - omschrijving Vierdaagse (zoals Ramadan)
 - dag selectie blijft niet staan (in middengedeelte) 
-- Tweede Paasdag, Pinksterdag en Kerstdag toevoegen aan 
-array selected_special_days
 - kleuren? 
 
-- vaste dagen elk jaar tonen 
+
+- Tweede Paasdag, Pinksterdag en Kerstedag toevoegen aan array selected_special_days  v 
+- vaste dagen elk jaar tonen v
 
 */
 
@@ -35,7 +35,7 @@ echo '
 
   <div class="color1">
 
-    <h2> Hoeveel dagen resteren / is het geleden tot de geselecteerde feestdag in het lopende jaar ('. $current_year . ') ?<br>
+    <h2> Hoeveel dagen resteren / is het geleden tot de geselecteerde feestdag in dit jaar ('. date('Y') . ') ?<br>
 
       En op welke dag valt / viel die dag?
     </h2>';

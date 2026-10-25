@@ -17,7 +17,10 @@ $days = ['', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag
 $months = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
 
 $date_today = date('d-m-Y');
-$current_year = date('Y'); 
+$current_year; 
+
+($_POST['select_year'] ? $current_year = $_POST['select_year'] : $current_year = date('Y'));    
+
 $Easter = date('d-m-Y', easter_date($current_year)); 
 
 //$prinsjesdag; 
@@ -145,7 +148,11 @@ $selected_special_days = array(
    array("month" => 10, "date" => 4, "text" => 'Dierendag'), 
    array("month" => 10, "date" => 3, "text" => 'Leids Ontzet & Tag der deutschen Einheit'),
    array("month" => 5, "date" => 1, "text" => 'Dag van de Arbeid'), 
-   array("month" => 8, "date" => 15, "text" => 'Ferragosto')
+   array("month" => 8, "date" => 15, "text" => 'Ferragosto'), 
+   array("month" => 12, "date" => 26, "text" => 'Tweede Kerstdag'), 
+   array("month" => (date('n', (strtotime($Easter) + (50 * 24 * 3600)))), "date" => date('d', (strtotime($Easter) + (50 * 24 * 3600))), "text" => 'Tweede Pinksterdag'), 
+   array("month" => date('n', (easter_date($current_year) + 86400)), 
+   "date" => intval((date('d', (easter_date($current_year) + 86400)))), "text" => 'Tweede Paasdag')
 
 );
 
