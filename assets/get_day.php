@@ -1,16 +1,14 @@
 
 <?php 
 
+// Middelste deel..
+
  $valt; 
  $num_days;
 
- include ('./assets/special_dates.php');
+ include ('./assets/arrays/special_dates.php');
  
  // Controleren op gebeurtenissen op de geselecteerde datum... 
-
- // checkOnEvents($special_dates);
-   
- // function checkOnEvents(...$array) {
      
     for ($i=0; $i < sizeof($special_dates); $i++) {
 
@@ -24,7 +22,7 @@
        }}
 
 
-        // Controleren of geselecteerde datum feestdag is (in huidige jaar)... 
+ // Controleren of geselecteerde datum feestdag is... 
 
         for ($i=0; $i < sizeof($found_selected_special_day); $i++) {
 
@@ -90,6 +88,9 @@ echo '
        
        {
        
+
+  // Nog even controleren of de geselecteerde datum bestaat...
+
     if (
         ($_POST['select_month'] == 2 || $_POST['select_month'] == 4 || 
         $_POST['select_month'] == 6 || $_POST['select_month'] == 9 || 
@@ -153,8 +154,8 @@ echo '
      </div></a>';
 
     if ($af['sound']) {
-    echo '<img id="playstop" src="./assets/play_white.png">
-    <audio id="sound" type="audio/mpeg" src="./sound/'.$af['sound'].'.mp3"></audio>';
+    echo '<img id="playstop" src="./assets/img/play_white.png">
+    <audio id="sound" type="audio/mpeg" src="./sounds/'.$af['sound'].'.mp3"></audio>';
 
     ?>
     <script>

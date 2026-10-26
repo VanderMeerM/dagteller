@@ -7,37 +7,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 */
 
+include ('./assets/arrays/general_arrays.php');
 
-// Enkele variabelen en arrays..
-
-$array_filter_sp = []; 
-$feestdagen_chr_NL_sorted = [];
-
-$days = ['', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag', 'zondag'];
-$months = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
-
-$date_today = date('d-m-Y');
-$current_year; 
-
-($_POST['select_year'] ? $current_year = $_POST['select_year'] : $current_year = date('Y'));    
-
-$Easter = date('d-m-Y', easter_date($current_year)); 
-
-//$prinsjesdag; 
-$start_ramadan;
-
-
-// Array met vaste data vanaf september..
-
-$feestdagen_from_sept = array (
-    array ("month" => 11, "date" => 3, "class" => "orange", "text" => 'Mijn verjaardag'),
-	array ("month" => 12, "date" => 5, "text" => 'Sinterklaas'),
-	array ("month" => 12, "date" => 25, "text" => 'Kerst'),
-	array ("month" => 12, "date" => 31, "text" => 'Oudjaar')
-);
-
-
-// Bepaal datum Prinsjesdag en voeg toe aan bovenstaande array..
+// Bepaal eerste dinsdag in de maand (voor begin Vierdaagse & Prinsjesdag)..
 
 function get_first_tuesday($month, $year) {
 $date_dm = date_create();
@@ -55,24 +27,31 @@ $diff_first_day_month = date('N', strtotime($first_day_month)) - 2;
 
 
 $prinsjesdag = get_first_tuesday (9, $current_year);
+
+
+// Data voor Vierdaagse..
+
 $vierdaagse = get_first_tuesday (7, $current_year);
+$end_vierdaagse = ($vierdaagse + 3) . '-07-' . $current_year; 
+
+
+// Zet Prinsjesdag in array...
 
 array_unshift($feestdagen_from_sept, array("month" => 9, "date" => $prinsjesdag, "text" => 'Prinsjesdag'));
  
 
- // Array met 'Nederlandse' feestdagen..
+// Array met 'Nederlandse' feestdagen..
 
-   $new_years_day = array ("month" => 1, "date" => 1, "text" => 'Nieuwjaarsdag');
-   $queensday = array ("month" => 4, "date" => 27, "class" => "orange", "text" => 'Koningsdag');
-   $lib_day = array ("month" => 5, "date" => 5, "class" => "orange", "text" => 'Bevrijdingsdag'); 
+$new_years_day = array ("month" => 1, "date" => 1, "text" => 'Nieuwjaarsdag');
+$queensday = array ("month" => 4, "date" => 27, "class" => "orange", "text" => 'Koningsdag');
+$lib_day = array ("month" => 5, "date" => 5, "class" => "orange", "text" => 'Bevrijdingsdag'); 
 
 
-// Bepaal Pasen, Hemelvaart & Pinksteren en zet ze  in array..
+// Bepaal Pasen, Hemelvaart & Pinksteren en zet ze in array..
 
 $easter_day = array("month" => (date('n', strtotime($Easter))), "date" => intval((date('d', strtotime($Easter)))), "text" => 'Pasen');
-
 $ascension_day = date('d-m-Y', (strtotime($Easter) + (39 * 24 * 3600)));
-$penteCost = date('d-m-Y', (strtotime($Easter) + (49 * 24 * 3600))); // + (49 * 86400000))));
+$penteCost = date('d-m-Y', (strtotime($Easter) + (49 * 24 * 3600))); 
 
 $chr_feestdagen = array(
 array("month" => (date('n', strtotime($ascension_day))), "date" => (date('d', strtotime($ascension_day))), "text" => 'Hemelvaart'),
@@ -116,7 +95,7 @@ array_unshift($feestdagen, $new_years_day);
 
 // Ramadan bepalen..
 
-include ('./assets/get_ramadan_date.php');
+include ('./assets/PHP/get_ramadan_date.php');
 
 // Zet Ramadan op juiste 'plek' in feestdagen..
 
@@ -135,7 +114,7 @@ for ($i=0; $i <sizeof($feestdagen); $i++) {
      array_push($feestdagen_bf_ramadan, $feestdagen[$i]);
     }
     else {
-         array_push($feestdagen_at_ramadan, $feestdagen[$i]);
+     array_push($feestdagen_at_ramadan, $feestdagen[$i]);
     }
 }
 
@@ -144,17 +123,7 @@ array_push($feestdagen_bf_ramadan, array("month" => intval(explode('-', $start_r
 
 $feestdagen = array_merge($feestdagen_bf_ramadan, $feestdagen_at_ramadan);
 
-$selected_special_days = array(
-   array("month" => 10, "date" => 4, "text" => 'Dierendag'), 
-   array("month" => 10, "date" => 3, "text" => 'Leids Ontzet & Tag der deutschen Einheit'),
-   array("month" => 5, "date" => 1, "text" => 'Dag van de Arbeid'), 
-   array("month" => 8, "date" => 15, "text" => 'Ferragosto'), 
-   array("month" => 12, "date" => 26, "text" => 'Tweede Kerstdag'), 
-   array("month" => (date('n', (strtotime($Easter) + (50 * 24 * 3600)))), "date" => date('d', (strtotime($Easter) + (50 * 24 * 3600))), "text" => 'Tweede Pinksterdag'), 
-   array("month" => date('n', (easter_date($current_year) + 86400)), 
-   "date" => intval((date('d', (easter_date($current_year) + 86400)))), "text" => 'Tweede Paasdag')
+include ('./assets/arrays/extra_days.php');
 
-);
-
-$found_selected_special_day = array_merge($feestdagen, $selected_special_days);
+$found_selected_special_day = array_merge($feestdagen, $selected_extra_days);
 

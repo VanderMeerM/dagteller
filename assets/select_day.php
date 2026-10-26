@@ -1,6 +1,8 @@
 
 <?php 
 
+// Bovenste deel..
+
 echo '
     <form method="post"> 
 
@@ -28,7 +30,13 @@ echo '</select>
         $date_set_ts = strtotime(date_format($date_fs, 'd-m-Y')); 
 
          if (explode('-', $_POST['feestdag'])[2] === 'Ramadan') {
-            text_ramadan($end_ramadan, $months, $days, $date_today);
+
+            text_ramvier($end_ramadan, $months, $days, $date_today);
+
+        } else if (explode('-', $_POST['feestdag'])[2] === 'Vierdaagse') {
+
+            text_ramvier($end_vierdaagse, $months, $days, $date_today);
+
         } else {
 
         // Vandaag 
@@ -75,30 +83,30 @@ echo '
    </div>
    </div>';
 
-   function text_ramadan($enddate, $months, $days, $date_today) {
+   function text_ramvier($enddate, $months, $days, $date_today) {
        
     $date_fs = date_create();
     date_date_set($date_fs, date('Y'),(explode('-', $_POST['feestdag'])[1]), (explode('-', $_POST['feestdag'])[0]));
     $date_set_ts = strtotime(date_format($date_fs, 'd-m-Y')); 
     $start_day = $days[date('N', $date_set_ts)];
     
-    $start_ramadan = date('d-m-Y', $date_set_ts);
+    $start_sp_day = date('d-m-Y', $date_set_ts);
     $begins;
     $ends;
 
-    $end_ramadan = strtotime($enddate);
-    $end_day = $days[date('N', $end_ramadan)];
+    $end_sp_day = strtotime($enddate);
+    $end_day = $days[date('N', $end_sp_day)];
    
  
    // Huidige datum na einddatum...
 
-   if (strtotime(date('d-m-Y')) > $end_ramadan) {
+   if (strtotime(date('d-m-Y')) > $end_sp_day) {
     $begins = 'begon';
     $ends = 'eindigde';
     $in_days;
     $days_ago;
-    (strtotime($date_today) - $end_ramadan == 86400 ? $days_ago = ' (gisteren)' : 
-    $days_ago = ' (' .round((strtotime($date_today) - $end_ramadan) / 86400) .' dagen geleden)');
+    (strtotime($date_today) - $end_sp_day == 86400 ? $days_ago = ' (gisteren)' : 
+    $days_ago = ' (' .round((strtotime($date_today) - $end_sp_day) / 86400) .' dagen geleden)');
    
     }
     
@@ -113,7 +121,7 @@ echo '
     $in_days = ' (over '.round( ($date_set_ts - strtotime($date_today)) / 86400) .' dagen)');
     }
 
-    // Tijdens Ramadan...
+    // Tijdens periode...
 
     else {
     $begins = 'begon';
@@ -121,12 +129,12 @@ echo '
     $in_days;
     $days_ago;
 
-    ($end_ramadan - strtotime($date_today) == 86400 ? $days_ago = ' (morgen)' :
-    $days_ago = ' (over '.round( ($end_ramadan - strtotime($date_today)) / 86400) .' dagen)');
+    ($end_sp_day - strtotime($date_today) == 86400 ? $days_ago = ' (morgen)' :
+    $days_ago = ' (over '.round( ($end_sp_day - strtotime($date_today)) / 86400) .' dagen)');
     }
 
    
-   echo 'Ramadan '. $begins . ' op ' . $start_day . ' ' . intval(explode('-', $start_ramadan)[0]) . ' ' . $months[intval(explode('-', $start_ramadan)[1])-1] . '' . $in_days .' en '. $ends .' op '. $end_day .' '. intval(date('d', $end_ramadan)) . ' ' . $months[intval(date('m', $end_ramadan))-1] . '' . $days_ago .'.';
+   echo (explode('-', $_POST['feestdag'])[2]) . ' ' . $begins . ' op ' . $start_day . ' ' . intval(explode('-', $start_sp_day)[0]) . ' ' . $months[intval(explode('-', $start_sp_day)[1])-1] . '' . $in_days .' en '. $ends .' op '. $end_day .' '. intval(date('d', $end_sp_day)) . ' ' . $months[intval(date('m', $end_sp_day))-1] . '' . $days_ago .'.';
 
     }
 
