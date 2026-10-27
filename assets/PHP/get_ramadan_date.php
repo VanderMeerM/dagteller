@@ -9,9 +9,11 @@ error_reporting(E_ALL);
 
 // Islamitisch jaar bepalen ahv geselecteerde 'Christelijk' jaar.. 
 
+function determineIslYear($year) {
+
 $curl_gtoh = curl_init();
 
-$cur_url_gtoh = 'https://api.aladhan.com/v1/islamicYearFromGregorianForRamadan/'. $current_year. '';
+$cur_url_gtoh = 'https://api.aladhan.com/v1/islamicYearFromGregorianForRamadan/'. $year. '';
 
 curl_setopt_array($curl_gtoh, array(
   CURLOPT_URL => $cur_url_gtoh,
@@ -32,7 +34,12 @@ $response_gtoh = curl_exec($curl_gtoh);
 
 $response_gtoh = json_decode($response_gtoh, true); 
 
-$isl_year = $response_gtoh['data'];
+return $det_year = $response_gtoh['data'];
+}
+
+$isl_year = determineIslYear(date('Y'));
+
+$isl_selected_year = determineIslYear($_POST['select_year']);
 
 
 // Begin aankomende Ramadan bepalen...
@@ -64,9 +71,6 @@ return $response_st_ram['data']['gregorian']['date'];
 
 }
 
-$start_ramadan = getRamadan($isl_year, 9);
-$end_ramadan = getRamadan($isl_year, 10);
-
 if ( date('Y', strtotime($response_st_ram['data']['gregorian']['date'])) != date('Y')) {
 
   $start_ramadan = getRamadan(($isl_year), 9);
@@ -77,6 +81,9 @@ if ( date('Y', strtotime($response_st_ram['data']['gregorian']['date'])) != date
  $start_ramadan = getRamadan($isl_year, 9);
  $end_ramadan = getRamadan(($isl_year), 10);
 };
+
+$start_ramadan_sel_year = getRamadan($isl_selected_year, 9);
+$end_ramadan_sel_year = getRamadan($isl_selected_year, 10);
 
 
 

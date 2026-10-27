@@ -9,6 +9,7 @@ error_reporting(E_ALL);
 
 include ('./assets/arrays/general_arrays.php');
 
+
 // Bepaal eerste dinsdag in de maand (voor begin Vierdaagse & Prinsjesdag)..
 
 function get_first_tuesday($month, $year) {
@@ -27,6 +28,7 @@ $diff_first_day_month = date('N', strtotime($first_day_month)) - 2;
 
 
 $prinsjesdag = get_first_tuesday (9, $current_year);
+$prinsjesdag_ty = get_first_tuesday (9, date('Y'));
 
 
 // Data voor Vierdaagse..
@@ -34,10 +36,13 @@ $prinsjesdag = get_first_tuesday (9, $current_year);
 $vierdaagse = get_first_tuesday (7, $current_year);
 $end_vierdaagse = ($vierdaagse + 3) . '-07-' . $current_year; 
 
+$vierdaagse_ty = get_first_tuesday (7, date('Y'));
+$end_vierdaagse_ty = ($vierdaagse + 3) . '-07-' . date('Y'); 
 
-// Zet Prinsjesdag in array...
 
-array_unshift($feestdagen_from_sept, array("month" => 9, "date" => $prinsjesdag, "text" => 'Prinsjesdag'));
+// Zet Prinsjesdag (voor het huidige jaar) in array...
+
+array_unshift($feestdagen_from_sept, array("month" => 9, "date" => $prinsjesdag_ty, "text" => 'Prinsjesdag'));
  
 
 // Array met 'Nederlandse' feestdagen..
@@ -49,14 +54,27 @@ $lib_day = array ("month" => 5, "date" => 5, "class" => "orange", "text" => 'Bev
 
 // Bepaal Pasen, Hemelvaart & Pinksteren en zet ze in array..
 
-$easter_day = array("month" => (date('n', strtotime($Easter))), "date" => intval((date('d', strtotime($Easter)))), "text" => 'Pasen');
-$ascension_day = date('d-m-Y', (strtotime($Easter) + (39 * 24 * 3600)));
-$penteCost = date('d-m-Y', (strtotime($Easter) + (49 * 24 * 3600))); 
+$easter_day = array("month" => (date('n', strtotime($Easter_ty))), "date" => intval((date('d', strtotime($Easter_ty)))), "text" => 'Pasen');
+$ascension_day = date('d-m-Y', (strtotime($Easter_ty) + (39 * 24 * 3600)));
+$penteCost = date('d-m-Y', (strtotime($Easter_ty) + (49 * 24 * 3600))); 
 
 $chr_feestdagen = array(
 array("month" => (date('n', strtotime($ascension_day))), "date" => (date('d', strtotime($ascension_day))), "text" => 'Hemelvaart'),
 array("month" => (date('n', strtotime($penteCost))), "date" => (date('d', strtotime($penteCost))), "text" => 'Pinksteren')
 );
+
+
+// Bepaal Pasen, Hemelvaart & Pinksteren voor geselecteerde jaar.. 
+
+$easter_day_sel_year = array("month" => (date('n', strtotime($Easter))), "date" => intval((date('d', strtotime($Easter)))), "text" => 'Pasen');
+$ascension_day_sel_year = date('d-m-Y', (strtotime($Easter) + (39 * 24 * 3600)));
+$penteCost_sel_year = date('d-m-Y', (strtotime($Easter) + (49 * 24 * 3600))); 
+
+$chr_feestdagen_sel_year = array(
+array("month" => (date('n', strtotime($ascension_day_sel_year))), "date" => (date('d', strtotime($ascension_day_sel_year))), "text" => 'Hemelvaart'),
+array("month" => (date('n', strtotime($penteCost_sel_year))), "date" => (date('d', strtotime($penteCost_sel_year))), "text" => 'Pinksteren')
+);
+
 
 // Voeg Pasen als eerste toe aan de gesorteerde array..
 
@@ -82,7 +100,7 @@ array_push($feestdagen_chr_NL_sorted, $chr_feestdagen[0], $chr_feestdagen[1]);
 
 // ..en de Vierdaagse..
 
-array_push($feestdagen_chr_NL_sorted, array("month" => 7, "date" => $vierdaagse, "text" => 'Vierdaagse'));
+array_push($feestdagen_chr_NL_sorted, array("month" => 7, "date" => $vierdaagse_ty, "text" => 'Nijmeegse Vierdaagse'));
 
 // Zet alles bij elkaar...
 
@@ -123,7 +141,7 @@ array_push($feestdagen_bf_ramadan, array("month" => intval(explode('-', $start_r
 
 $feestdagen = array_merge($feestdagen_bf_ramadan, $feestdagen_at_ramadan);
 
-include ('./assets/arrays/extra_days.php');
+include ('./assets/arrays/extra_days.php'); 
 
-$found_selected_special_day = array_merge($feestdagen, $selected_extra_days);
+include ('./assets/PHP/build_special_days_sel_year.php');
 

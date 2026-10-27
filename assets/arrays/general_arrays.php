@@ -14,9 +14,10 @@ $months = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augu
 $date_today = date('d-m-Y');
 $current_year; 
 
-($_POST['select_year'] ? $current_year = $_POST['select_year'] : $current_year = date('Y'));    
+($_POST['select_year'] ? $current_year = $_POST['select_year'] : $current_year = date('Y')); 
 
 $Easter = date('d-m-Y', easter_date($current_year)); 
+$Easter_ty = date('d-m-Y', easter_date(date('Y'))); 
 
 $start_ramadan;
 

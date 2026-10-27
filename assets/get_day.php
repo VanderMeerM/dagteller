@@ -50,6 +50,8 @@ echo '
 
    <form method="post"> 
 
+    <input type="hidden" value="Y" name="sel_changed_year">
+
     <select name="select_date" id="select_date" onchange="this.form.submit()">
     <option disabled selected>Kies een datum</option>';
 
@@ -142,7 +144,7 @@ echo '
 
      echo '
      <div class="container_events">'
-     .explode('-', $af['date'])[2] . ' ('. ($current_year - explode('-', $af['date'])[2]) .' jaar geleden)
+     .explode('-', $af['date'])[2] . ' ('. (date('Y') - explode('-', $af['date'])[2]) .' jaar geleden)
     
      <div id="specialdates">
      <a target = "blank" href= "https://nl.wikipedia.org/wiki/'. $af['link'] .'"> '.$af['event'].''; 

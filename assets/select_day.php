@@ -33,7 +33,7 @@ echo '</select>
 
             text_ramvier($end_ramadan, $months, $days, $date_today);
 
-        } else if (explode('-', $_POST['feestdag'])[2] === 'Vierdaagse') {
+        } else if (explode('-', $_POST['feestdag'])[2] === 'Nijmeegse Vierdaagse') {
 
             text_ramvier($end_vierdaagse, $months, $days, $date_today);
 
@@ -75,9 +75,10 @@ echo '</select>
         };
           
     }
-        echo '</div><div><img id="img_symbol" src=./images/symbols/' . explode('-', $_POST['feestdag'])[2] . '.jpeg></div>';    
-    }
+        $name_img = str_replace(" ", "_", explode('-', $_POST['feestdag'])[2]);
 
+        echo "</div><div><img id='img_symbol' src=./images/symbols/$name_img.jpeg></div>";    
+    }
   
 echo '
    </div>
