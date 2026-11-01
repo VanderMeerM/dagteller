@@ -16,8 +16,9 @@ $current_year;
 
 ($_POST['select_year'] ? $current_year = $_POST['select_year'] : $current_year = date('Y')); 
 
-$Easter = date('d-m-Y', easter_date($current_year)); 
-$Easter_ty = date('d-m-Y', easter_date(date('Y'))); 
+// extra dag erbij tellen; anders klopt de datum niet op de server...
+$Easter = date('d-m-Y', easter_date($current_year) + 86400); 
+$Easter_ty = date('d-m-Y', easter_date(date('Y')) + 86400); 
 
 $start_ramadan;
 
