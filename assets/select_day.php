@@ -77,7 +77,7 @@ echo '</select>
     }
         $name_img = str_replace(" ", "_", explode('-', $_POST['feestdag'])[2]);
 
-        echo "</div><div><img id='img_symbol' src=./images/symbols/$name_img.jpeg></div>";    
+        echo "</div><div><img id='img_symbol' src=./images/symbols/$name_img></div>";    
     }
   
 echo '
