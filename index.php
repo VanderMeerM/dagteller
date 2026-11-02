@@ -21,7 +21,10 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 */
 
-/* Wishlist 
+/* Wishlist
+
+- Pasen, Hemelvaart etc. toevoegen aan middelste blok 
+- seizoenen toevoegen (herst, winter, zomeer, lente)
 
 - kleuren? 
 
@@ -33,7 +36,7 @@ error_reporting(E_ALL);
 - afbeeldingen gelijk v
 - Mijn verjaardag / Nijmeegse Vierdaagse v 
 - omschrijving Vierdaagse (zoals Ramadan) v
-- Tweede Paasdag, Pinksterdag en Kerstedag toevoegen aan array selected_special_days  v 
+- Tweede Paasdag, Pinksterdag en Kerstdag toevoegen aan array selected_special_days  v 
 - vaste dagen elk jaar tonen v 
 
 */
