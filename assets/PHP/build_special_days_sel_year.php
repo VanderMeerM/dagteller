@@ -11,16 +11,19 @@ array_shift($feestdagen_sel_year);
 
 // .. en vervolgens Prinsjesdag en de Vierdaagse voor het geselecteerde jaar invoegen..
 array_push($feestdagen_sel_year, array("month" => 9, "date" => $prinsjesdag, "text" => 'Prinsjesdag'));
-array_push($feestdagen_sel_year, array("month" => 7, "date" => $vierdaagse, "text" => 'Vierdaagse'));
+array_push($feestdagen_sel_year, array("month" => 7, "date" => $vierdaagse, "text" => 'Vierdaagse', "since" => 1925));
+
+
+// Deze dagen even weggelaten omdat telkens de datum in het huidige jaar wordt geselecteerd..
 
 // Pasen...
-array_push ($feestdagen_sel_year, $easter_day_sel_year);
+// array_push ($feestdagen_sel_year, $easter_day_sel_year);
 
 // ..en Hemelvaart & Pinksteren..
-array_push($feestdagen_sel_year, $chr_feestdagen_sel_year[0], $chr_feestdagen_sel_year[1]);
+// array_push($feestdagen_sel_year, $chr_feestdagen_sel_year[0], $chr_feestdagen_sel_year[1]);
 
 // ..en de 'vaste' feestdagen voor september..
-array_push($feestdagen_sel_year, [$new_years_day, $queensday, $lib_day]);
+array_push($feestdagen_sel_year, $new_years_day, $queensday, $lib_day);
 
 // ..Ramadan in het geselecteerde jaar.. 
 array_push($feestdagen_sel_year, array("month" => explode('-', $start_ramadan_sel_year)[1], "date" => explode('-', $start_ramadan_sel_year)[0], "text" => 'Ramadan'));

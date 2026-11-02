@@ -24,19 +24,32 @@
 
  // Controleren of geselecteerde datum feestdag is... 
 
-        for ($i=0; $i < sizeof($found_selected_special_day); $i++) {
+    for ($i=0; $i < sizeof($found_selected_special_day); $i++) {
 
-       if ( 
-        ($_POST['select_date'] == $found_selected_special_day[$i]['date']) && 
+       if ($found_selected_special_day[$i]['since']) {
+
+             if ( 
+                 $_POST['select_date'] == $found_selected_special_day[$i]['date'] && 
+                  $_POST['select_month'] == $found_selected_special_day[$i]['month'] && 
+                  $_POST['select_year'] >= $found_selected_special_day[$i]['since']
+                  ) 
+                {
+            $found_special_day = '<i>('. $found_selected_special_day[$i]['text'] . ')</i>';
+                }
+
+       }
+       
+       else if ( 
+        $_POST['select_date'] == $found_selected_special_day[$i]['date'] && 
         $_POST['select_month'] == $found_selected_special_day[$i]['month'] && 
-        $_POST['select_year'] == $current_year )
+        $_POST['select_year'] == $current_year 
+       )
         
         {
        $found_special_day = '<i>('. $found_selected_special_day[$i]['text'] . ')</i>';
 
        }}
       
-    
 
 // Datum selecteren en dag bepalen...
 
@@ -119,7 +132,7 @@ echo '
          else if ( ($day_difference > 86400) && ($current_year == date('Y') )){
             $num_days = ' ('. round($day_difference/86400) .' dagen geleden)'; 
         } 
-         else if ( (($day_difference * -1) > 86400) && ($current_year == $_POST['select_year']) ){
+         else if ( (($day_difference * -1) > 86400) && ($current_year == date('Y') ) ){
             $num_days = ' (over '. round(($day_difference/86400) * -1) .' dagen)'; 
         }     
 
@@ -183,6 +196,7 @@ echo '
       
      echo '
      </div>';
+
 ?>
 
 <script>
@@ -224,7 +238,6 @@ let months_sel = <?php echo json_encode($months); ?>
 <script>
 let selectedDate = <?php echo json_encode($_POST['select_date']); ?>
 
-
     selectField('select_year', selectedYear);
     selectField('select_month', selectedMonth);
     selectField('select_date', selectedDate);
@@ -241,8 +254,9 @@ let selectedDate = <?php echo json_encode($_POST['select_date']); ?>
             if (sf === selectedMonth) {
                 if (selectField[i].text === months_sel[selectedMonth-1]) {
                  selectField[i].selected = true;
+                (document.getElementById('select_date')[document.getElementById('select_date')[i].value]).selected = true;
                 }
-            }
+             }
 
             else if (selectField[i].text === sf) {
             selectField[i].selected = true;

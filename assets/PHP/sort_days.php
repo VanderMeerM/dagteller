@@ -48,8 +48,8 @@ array_unshift($feestdagen_from_sept, array("month" => 9, "date" => $prinsjesdag_
 // Array met 'Nederlandse' feestdagen..
 
 $new_years_day = array ("month" => 1, "date" => 1, "text" => 'Nieuwjaarsdag');
-$queensday = array ("month" => 4, "date" => 27, "class" => "orange", "text" => 'Koningsdag');
-$lib_day = array ("month" => 5, "date" => 5, "class" => "orange", "text" => 'Bevrijdingsdag'); 
+$queensday = array ("month" => 4, "date" => 27, "class" => "orange", "text" => 'Koningsdag', "since" => 2013);
+$lib_day = array ("month" => 5, "date" => 5, "class" => "orange", "text" => 'Bevrijdingsdag', "since" => 1945); 
 
 
 // Bepaal Pasen, Hemelvaart & Pinksteren en zet ze in array..

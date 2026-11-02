@@ -15,15 +15,23 @@
 
 <?php 
 
+/*
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+*/
+
 /* Wishlist 
 
-- afbeeldingen gelijk 
-- Mijn verjaardag / Nijmeegse Vierdaagse 
-
-
-- dag selectie blijft niet staan (in middengedeelte) 
 - kleuren? 
 
+- Koningsdag v.a. 2013 v
+- Mijn verjaardag v.a. 1975 v 
+- Dodenherdenking & Bevrijdingsdag v.a. 1946 v 
+- Vierdaagse v.a. 1925 v
+- dag selectie blijft niet staan (in middengedeelte) v 
+- afbeeldingen gelijk v
+- Mijn verjaardag / Nijmeegse Vierdaagse v 
 - omschrijving Vierdaagse (zoals Ramadan) v
 - Tweede Paasdag, Pinksterdag en Kerstedag toevoegen aan array selected_special_days  v 
 - vaste dagen elk jaar tonen v 

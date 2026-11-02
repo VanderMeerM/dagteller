@@ -5,7 +5,7 @@ $selected_extra_days = array(
 
    array("month" => 10, "date" => 4, "text" => 'Dierendag'), 
 
-   array("month" => 5, "date" => 4, "text" => 'Dodenherdenking'), 
+   array("month" => 5, "date" => 4, "text" => 'Dodenherdenking', "since" => 1946), 
    
    array("month" => 10, "date" => 3, "text" => 'Leids Ontzet & Tag der deutschen Einheit'),
 
@@ -13,7 +13,10 @@ $selected_extra_days = array(
    
    array("month" => 8, "date" => 15, "text" => 'Ferragosto'), 
    
-   array("month" => 12, "date" => 26, "text" => 'Tweede Kerstdag'), 
+   array("month" => 12, "date" => 26, "text" => 'Tweede Kerstdag')
+
+   /*
+   Pasen eruit ivm conflictering dat easter_date alleen vanaf 1970 werkt en tien jaar na huidige datum...
 
    array("month" => date('n', (easter_date($current_year) - (49 * 86400))), 
    "date" => intval((date('d', (easter_date($current_year) - (49 * 86400))))), "text" => 'Carnaval'),
@@ -22,5 +25,5 @@ $selected_extra_days = array(
    
    array("month" => date('n', (easter_date($current_year) + 86400)), 
    "date" => intval((date('d', (easter_date($current_year) + 86400)))), "text" => 'Tweede Paasdag')
-
+*/
 );
