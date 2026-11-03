@@ -39,11 +39,11 @@ if ( ($_POST['select_year']) &&
    array("month" => (date('n', (easter_date($_POST['select_year']) - (49 * 24 * 3600)))), 
    "date" => date('d', (easter_date($_POST['select_year']) - (49 * 24 * 3600))), "text" => 'Carnaval'),
 
- array("month" => date('n', easter_date($_POST['select_year'])), 
-  "date" => intval((date('d', easter_date($_POST['select_year'])))), "text" => 'Pasen'),
-   
-   array("month" => date('n', (easter_date($_POST['select_year']) + 86400)), 
-  "date" => intval((date('d', (easter_date($_POST['select_year']) + 86400)))), "text" => 'Tweede Paasdag'),
+  array("month" => date('n', (easter_date($_POST['select_year']) + (2 * 86400))), 
+  "date" => intval((date('d', (easter_date($_POST['select_year']) + (2 * 86400))))), "text" => 'Pasen'),
+
+  array("month" => date('n', easter_date($_POST['select_year'])), 
+  "date" => intval((date('d', easter_date($_POST['select_year'])))), "text" => 'Tweede Paasdag'),
 
   array("month" => (date('n', (easter_date($_POST['select_year']) + (39 * 24 * 3600)))), 
    "date" => date('d', (easter_date($_POST['select_year']) + (39 * 24 * 3600))), "text" => 'Hemelvaart'), 
