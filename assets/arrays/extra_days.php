@@ -36,7 +36,7 @@ if ( ($_POST['select_year']) &&
  
  $selected_extra_easter_days = array( 
 
-   array("month" => (date('n', (easter_date($_POST['select_year']) - (50 * 24 * 3600)))), 
+   array("month" => (date('n', (easter_date($_POST['select_year']) - (51 * 24 * 3600)))), 
    "date" => date('d', (easter_date($_POST['select_year']) - (49 * 24 * 3600))), "text" => 'Carnaval'),
 
   array("month" => date('n', (easter_date($_POST['select_year']) + (1 * 86400))), 
@@ -48,10 +48,10 @@ if ( ($_POST['select_year']) &&
   array("month" => (date('n', (easter_date($_POST['select_year']) + (40 * 24 * 3600)))), 
    "date" => date('d', (easter_date($_POST['select_year']) + (39 * 24 * 3600))), "text" => 'Hemelvaart'), 
 
-  array("month" => (date('n', (easter_date($_POST['select_year']) + (50 * 24 * 3600)))), 
+  array("month" => (date('n', (easter_date($_POST['select_year']) + (51 * 24 * 3600)))), 
    "date" => date('d', (easter_date($_POST['select_year']) + (49 * 24 * 3600))), "text" => 'Pinksteren'), 
 
-   array("month" => (date('n', (easter_date($_POST['select_year']) + (51 * 24 * 3600)))), 
+   array("month" => (date('n', (easter_date($_POST['select_year']) + (52 * 24 * 3600)))), 
    "date" => date('d', (easter_date($_POST['select_year']) + (50 * 24 * 3600))), "text" => 'Tweede Pinksterdag')
  
    );
