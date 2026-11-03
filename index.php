@@ -23,11 +23,10 @@ error_reporting(E_ALL);
 
 /* Wishlist
 
-- Pasen, Hemelvaart etc. toevoegen aan middelste blok 
-- seizoenen toevoegen (herst, winter, zomeer, lente)
-
 - kleuren? 
 
+- Pasen, Hemelvaart etc. toevoegen aan middelste blok v 
+- seizoenen toevoegen (herst, winter, zomeer, lente) v 
 - Koningsdag v.a. 2013 v
 - Mijn verjaardag v.a. 1975 v 
 - Dodenherdenking & Bevrijdingsdag v.a. 1946 v 

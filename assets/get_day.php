@@ -103,15 +103,33 @@ echo '
        
        {
        
-
   // Nog even controleren of de geselecteerde datum bestaat...
 
-    if (
-        ($_POST['select_month'] == 2 || $_POST['select_month'] == 4 || 
+    if ( 
+        (
+        ($_POST['select_month'] == 4 || 
         $_POST['select_month'] == 6 || $_POST['select_month'] == 9 || 
-        $_POST['select_month'] == 11) && $_POST['select_date'] == 31) {
+        $_POST['select_month'] == 11) && $_POST['select_date'] == 31
+        ) 
+        
+        || 
+
+        // Februari...
+
+        ( ($_POST['select_month'] == 2) && ($_POST['select_date'] == 31 || $_POST['select_date'] == 30) ) 
+
+        ||
+
+        // met controle op schrikkeljaar...
+        
+       ( ($_POST['select_month'] == 2) && ($_POST['select_date'] == 29) && ($_POST['select_year'] % 4 != 0) ) 
+        )
+              
+
+        {
         echo '<div class="container_events">Ongeldige datum</div>';
         }
+        
         else {
                  
         $date_selday = date_create();
