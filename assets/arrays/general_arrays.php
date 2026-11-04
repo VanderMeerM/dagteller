@@ -23,7 +23,8 @@ if ( ($_POST['select_year']) &&
 	$easter_year == $current_year;
 }
 
-// extra dag erbij tellen; anders klopt de datum niet op de server...
+// Extra dag voor easter_date erbij tellen; anders klopt de datum niet op de server...
+
 $Easter = date('d-m-Y', easter_date($easter_year) + 86400); 
 $Easter_ty = date('d-m-Y', easter_date(date('Y')) + 86400); 
 

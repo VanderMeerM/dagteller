@@ -25,8 +25,8 @@ $selected_extra_days = array(
 
 );
 
-//   Pasen en gerelateerde feestdagen worden alleen berekend tussen 1970 en tien jaar na huidige datum - 
-//  ivm conflictering dat easter_date alleen vanaf 1970 werkt en elf jaar na huidige datum...
+//   Pasen en gerelateerde feestdagen worden alleen berekend tussen 1970 en 10 jaar na huidig jaar - 
+//  ivm conflictering dat easter_date alleen vanaf 1970 werkt en 11 jaar na huidig jaar...
 
 if ( ($_POST['select_year']) &&  
   (($_POST['select_year'] < 1970) || ($_POST['select_year'] > (date('Y') + 10)))

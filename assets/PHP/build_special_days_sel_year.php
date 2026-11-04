@@ -14,7 +14,7 @@ array_push($feestdagen_sel_year, array("month" => 9, "date" => $prinsjesdag, "te
 array_push($feestdagen_sel_year, array("month" => 7, "date" => $vierdaagse, "text" => 'Vierdaagse', "since" => 1925));
 
 
-// Deze dagen even weggelaten omdat telkens de datum in het huidige jaar wordt geselecteerd..
+// Deze dagen weggelaten omdat anders de datum in het huidige jaar wordt geselecteerd..
 
 // Pasen...
 // array_push ($feestdagen_sel_year, $easter_day_sel_year);
