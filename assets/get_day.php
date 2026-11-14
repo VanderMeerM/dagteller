@@ -14,7 +14,13 @@
 
        if ( 
         ($_POST['select_date'] == explode('-', $special_dates[$i]['date'])[0] && 
-        $_POST['select_month'] == explode('-', $special_dates[$i]['date'])[1] ))
+        $_POST['select_month'] == explode('-', $special_dates[$i]['date'])[1] )
+        
+        ||
+
+        (date('d') == explode('-', $special_dates[$i]['date'])[0] && 
+        (date('m')) == explode('-', $special_dates[$i]['date'])[1] )
+        )
         
         {
        array_push($array_filter_sp, $special_dates[$i]);
