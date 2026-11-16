@@ -5,6 +5,8 @@ $selected_extra_days = array(
 
    array("month" => 10, "date" => 4, "text" => 'Dierendag'), 
 
+   array("month" => 11, "date" => 11, "text" => 'Start Carnaval'), 
+
    array("month" => 5, "date" => 4, "text" => 'Dodenherdenking', "since" => 1946), 
    
    array("month" => 10, "date" => 3, "text" => 'Leids Ontzet & Tag der deutschen Einheit'),

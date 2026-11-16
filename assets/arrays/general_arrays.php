@@ -35,7 +35,6 @@ $start_ramadan;
 
 $feestdagen_from_sept = array (
     array ("month" => 11, "date" => 3, "class" => "orange", "text" => 'Mijn verjaardag', 'since' => 1975),
-	array ("month" => 11, "date" => 11, "text" => 'Start Carnaval'),
 	array ("month" => 12, "date" => 5, "text" => 'Sinterklaas'),
 	array ("month" => 12, "date" => 25, "text" => 'Kerst'),
 	array ("month" => 12, "date" => 31, "text" => 'Oudjaar')
